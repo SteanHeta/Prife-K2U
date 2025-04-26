@@ -1,33 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const Products = () => {
-  const [products, setProducts] = useState([]); 
-  const [loading, setLoading] = useState(true); 
+const Products = ({ cart, saveCart }) => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/products') 
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/products');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
         setProducts(data);
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error fetching products:', error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    fetchData();
   }, []);
 
-  const addToCart = (productId) => {
-    alert(`Product ${productId} added to cart`);
+  const addToCart = (product) => {
+    const existingItem = cart.find(item => item.id === product.id);
+    let updatedCart;
+    
+    if (existingItem) {
+      updatedCart = cart.map(item =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+    } else {
+      updatedCart = [...cart, { ...product, quantity: 1 }];
+    }
+    
+    saveCart(updatedCart);
   };
 
-  if (loading) {
-    return <div className="text-center py-8">Loading products...</div>;
-  }
-
-  if (products.length === 0) {
-    return <div className="text-center py-8">No products found.</div>;
-  }
+  if (loading) return <div className="text-center py-8">Loading products...</div>;
+  if (!products.length) return <div className="text-center py-8">No products found.</div>;
 
   return (
     <div className="max-w-7xl mx-auto py-8 px-4">
@@ -40,7 +49,7 @@ const Products = () => {
               <h3 className="text-lg font-medium text-prifeBlue">{product.name}</h3>
               <p className="text-gray-600">${product.price.toFixed(2)}</p>
               <button
-                onClick={() => addToCart(product.id)}
+                onClick={() => addToCart(product)}
                 className="mt-4 w-full bg-prifeOrange text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300"
               >
                 Add to Cart

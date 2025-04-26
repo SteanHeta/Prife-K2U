@@ -5,7 +5,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyCKW2FKOfs5vGCEmvzzxTgP1s48nyepKAA",
   authDomain: "prife-k2u.firebaseapp.com",
   projectId: "prife-k2u",
-  storageBucket: "prife-k2u.firebasestorage.app",
+  storageBucket: "prife-k2u.appspot.com",
   messagingSenderId: "408652044835",
   appId: "1:408652044835:web:98893766f8df0a7aa2af96",
   measurementId: "G-GEFWHXXD79"
