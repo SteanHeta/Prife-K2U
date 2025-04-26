@@ -187,14 +187,26 @@
       
       const signInWithGoogle = () => {
         auth.signInWithPopup(googleProvider)
-          .then(() => window.location.reload());
+          .then(() => {
+            // Redirect to home page after successful sign-in
+            renderPage('home');
+          })
+          .catch(error => {
+            console.error("Google sign-in error:", error);
+            alert("Failed to sign in with Google. Please try again.");
+          });
       };
       
       const signOut = () => {
         auth.signOut()
-          .then(() => window.location.reload());
+          .then(() => {
+            // Redirect to login page after sign-out
+            renderPage('login');
+          })
+          .catch(error => {
+            console.error("Sign out error:", error);
+          });
       };
-      
       return (
         <nav className="bg-white shadow-lg">
           <div className="max-w-6xl mx-auto px-4">
@@ -626,4 +638,4 @@
     });
   </script>
 </body>
-</html> 
+</html>  with ability to sign in using google and adding new accounts
