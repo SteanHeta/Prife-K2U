@@ -22,15 +22,14 @@
   
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   
   <style>
-  
     #app {
       min-height: 100vh;
       display: flex;
@@ -39,7 +38,6 @@
     main {
       flex: 1;
     }
- 
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -57,114 +55,27 @@
   </style>
 </head>
 <body class="bg-gray-50">
-  <div id="app" class="min-h-screen flex flex-col">
-  </div>
+  <div id="app" class="min-h-screen flex flex-col"></div>
 
   <script type="text/babel">
-    
-   
+    // Firebase Configuration
     const firebaseConfig = {
-        apiKey: "AIzaSyCKW2FKOfs5vGCEmvzzxTgP1s48nyepKAA",
-  authDomain: "prife-k2u.firebaseapp.com",
-  projectId: "prife-k2u",
-  storageBucket: "prife-k2u.firebasestorage.app",
-  messagingSenderId: "408652044835",
-  appId: "1:408652044835:web:98893766f8df0a7aa2af96",
-  measurementId: "G-GEFWHXXD79"
+      apiKey: "AIzaSyCKW2FKOfs5vGCEmvzzxTgP1s48nyepKAA",
+      authDomain: "prife-k2u.firebaseapp.com",
+      projectId: "prife-k2u",
+      storageBucket: "prife-k2u.firebasestorage.app",
+      messagingSenderId: "408652044835",
+      appId: "1:408652044835:web:98893766f8df0a7aa2af96",
+      measurementId: "G-GEFWHXXD79"
     };
     
-   
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
     const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-    const products = [
-    {
-            "id": 1,
-            "name": "Prife Tera-Device",
-            "description": "Helps relieve chronic pain and improve circulation.",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFLE0lT6XZ6JB_8nlAgFZ1kMZXbiDwojsyrQ&s",
-            "price": 90000,
-            "category": "skin"
-          },
-          {
-            "id": 2,
-            "name": "Prife Energy Bracelet",
-            "description": "Boosts energy levels and supports immunity.",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhOdhkpX8lzqiBACO3N5vZn8vCu3NqiS4iTw&s",
-            "price": 35000,
-            "category": "skin"
-          },
-          {
-            "id": 3,
-            "name": "Prife Detox Patches",
-            "description": "Natural detox solution for daily use.",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtzVXdNR_4hHNE40Gd_lM-vQJ4J1YcGQ8bJg&s",
-            "price": 5000,
-            "category": "blood"
-          },
-          {
-            "id": 4,
-            "name": "Ion shield",
-            "description": "Improves sleep quality and mental wellness.",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT6vA4QsomiiLLwEJ-I2_KutXBdU_XoQAvvmxTf5CmGaWd7--W5ssD41Bj4sQtzj-cOeQ&usqp=CAU",
-            "price": 2000,
-            "category": "body"
-          },
-          {
-            "id": 5,
-            "name": "Prife Breathing Booster",
-            "description": "Supports respiratory health and oxygen levels.",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTa-yU4a2yKZBErYXzvWxo7TG1AoHDDwdeDQ&s",
-            "price": 25000,
-            "category": "blood"
-          },
-          {
-            "id": 6,
-            "name": "Prife 3in1 coffee",
-            "description": "Protects eye health and relieves strain.",
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsDXpxSd6cxa6FY9_fOj7yJfxpibTXrDCrPQ&s",
-            "price": 4300,
-            "category": "gut"
-            
-          },
-          {
-          "id": 7,
-            "name": "Prife Alfalfa",
-            "description": "Protects blood  circulation",
-            "image": "https://kalonji.co.ke/cdn/shop/files/AlfalfaConcentratedChlorophyll_2048x.jpg?v=1726203719",
-            "price": 4700,
-            "category": "blood"
-          },
-          {
-            "id": 8,
-              "name": "Prife nityam",
-              "description": "improves gut health",
-              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxMXAn9v5UAPmRqYoJ-O_3t6PCuvG2DbICPg&s",
-              "price": 1500,
-              "category": "gut"
-            },
-            {
-                "id": 9,
-                  "name": "7wonders bottle",
-                  "description": "Provides body relief",
-                  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6-zWCMsAQc8Nm3jYhThbYvQPwHBxQj72LCg&s",
-                  "price": 30000,
-                  "category": "skin"
-                },
-                {
-                    "id": 10,
-                      "name": "scalar watch",
-                      "description": "Provides protection.",
-                      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKlI5gLaseKs-Q3Pe6XpAwdx8LDEsaNQtr8Q&s",
-                      "price": 150000,
-                      "category": "body"
-                    }
-    ];
-
-   
-
+    // Local storage for cart and appointments
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
 
@@ -176,7 +87,7 @@
       localStorage.setItem('appointments', JSON.stringify(appointments));
     }
 
-    
+    // Navbar Component
     function Navbar() {
       const [user, setUser] = React.useState(null);
       
@@ -186,26 +97,14 @@
       
       const signInWithGoogle = () => {
         auth.signInWithPopup(googleProvider)
-          .then(() => {
-           
-            renderPage('home');
-          })
-          .catch(error => {
-            console.error("Google sign-in error:", error);
-            alert("Failed to sign in with Google. Please try again.");
-          });
+          .then(() => renderPage('home'))
+          .catch(error => console.error("Google sign-in error:", error));
       };
       
       const signOut = () => {
-        auth.signOut()
-          .then(() => {
-            
-            renderPage('login');
-          })
-          .catch(error => {
-            console.error("Sign out error:", error);
-          });
+        auth.signOut().then(() => renderPage('login'));
       };
+      
       return (
         <nav className="bg-white shadow-lg">
           <div className="max-w-6xl mx-auto px-4">
@@ -240,6 +139,7 @@
       );
     }
 
+    // Footer Component
     function Footer() {
       return (
         <footer className="bg-prifeBlue text-white py-6">
@@ -250,6 +150,7 @@
       );
     }
 
+    // Home Component
     function Home() {
       return (
         <div className="max-w-7xl mx-auto">
@@ -274,6 +175,7 @@
       );
     }
 
+    // Login Component
     function Login() {
       const [email, setEmail] = React.useState('');
       const [password, setPassword] = React.useState('');
@@ -293,8 +195,7 @@
       };
       
       const signInWithGoogle = () => {
-        auth.signInWithPopup(googleProvider)
-          .then(() => renderPage('home'));
+        auth.signInWithPopup(googleProvider).then(() => renderPage('home'));
       };
       
       return (
@@ -354,7 +255,24 @@
       );
     }
 
+    // Products Component (using json-server)
     function Products() {
+      const [products, setProducts] = React.useState([]);
+      const [loading, setLoading] = React.useState(true);
+
+      React.useEffect(() => {
+        fetch('http://localhost:3000/products')
+          .then(res => res.json())
+          .then(data => {
+            setProducts(data);
+            setLoading(false);
+          })
+          .catch(err => {
+            console.error("Error fetching products:", err);
+            setLoading(false);
+          });
+      }, []);
+
       const addToCart = (productId) => {
         const product = products.find(p => p.id === productId);
         const existingItem = cart.find(item => item.id === productId);
@@ -370,6 +288,8 @@
         alert(`${product.name} added to cart!`);
       };
       
+      if (loading) return <div className="text-center py-8">Loading products...</div>;
+
       return (
         <div className="max-w-7xl mx-auto py-8 px-4">
           <h2 className="text-2xl font-bold text-prifeBlue mb-8">Our Products</h2>
@@ -397,6 +317,7 @@
       );
     }
 
+    // Cart Component
     function Cart() {
       const removeFromCart = (productId) => {
         cart = cart.filter(item => item.id !== productId);
@@ -500,6 +421,7 @@
       );
     }
 
+    // Appointment Components
     function AppointmentsList() {
       const cancelAppointment = (index) => {
         appointments.splice(index, 1);
@@ -593,7 +515,7 @@
       );
     }
 
-    
+    // Main render function
     function renderPage(page) {
       let content;
       switch(page) {
@@ -631,7 +553,7 @@
       );
     }
 
-    
+    // Initialize app
     auth.onAuthStateChanged(user => {
       renderPage(user ? 'home' : 'login');
     });
