@@ -1,15 +1,13 @@
 import React from "react";
 
-let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
-
-function saveAppointments() {
-  localStorage.setItem("appointments", JSON.stringify(appointments));
-}
-
 export default function AppointmentsList() {
+  const appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+
   const cancelAppointment = (index) => {
-    appointments.splice(index, 1);
-    saveAppointments();
+    const updatedAppointments = [...appointments];
+    updatedAppointments.splice(index, 1);
+    localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+    window.location.reload();
   };
 
   return (
