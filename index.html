@@ -117,9 +117,9 @@
                 </div>
                 {user && (
                   <div className="hidden md:flex items-center space-x-1">
-                    <a href="#" onClick={() => renderPage('products')} className="py-4 px-2 text-gray-500 font-semibold hover:text-prifeBlue transition duration-300">Products</a>
-                    <a href="#" onClick={() => renderPage('appointment')} className="py-4 px-2 text-gray-500 font-semibold hover:text-prifeBlue transition duration-300">Appointments</a>
-                    <a href="#" onClick={() => renderPage('cart')} className="py-4 px-2 text-gray-500 font-semibold hover:text-prifeBlue transition duration-300">Cart ({cart.length})</a>
+                    <a href="#" onClick={() => renderPage('products')} className="py-4 px-2 text-gray-500 font-semibold hover:text-prifeBlue transition duration-300"><span className="font-semibold text-prifeBlue text-lg">Products</span></a>
+                    <a href="#" onClick={() => renderPage('appointment')} className="py-4 px-2 text-gray-500 font-semibold hover:text-prifeBlue transition duration-300"><span className="font-semibold text-prifeBlue text-lg">Appointments</span></a>
+                    <a href="#" onClick={() => renderPage('cart')} className="py-4 px-2 text-gray-500 font-semibold hover:text-prifeBlue transition duration-300"><span className="font-semibold text-prifeBlue text-lg">Cart ({cart.length})</span></a>
                   </div>
                 )}
               </div>
