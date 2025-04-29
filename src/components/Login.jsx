@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { auth, googleProvider } from "../firebase";
 
 export default function Login({ renderPage }) {

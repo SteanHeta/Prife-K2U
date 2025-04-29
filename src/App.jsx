@@ -9,6 +9,7 @@ import Products from './components/Products'
 import Cart from './components/Cart'
 import Appointment from './components/Appointment'
 import AppointmentsList from './components/AppointmentsList'
+import Checkout from './components/Checkout'
 
 function App() {
   const [user, setUser] = useState(null)
